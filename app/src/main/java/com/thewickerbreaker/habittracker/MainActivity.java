@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         values.put(MealEntry.COLUMN_MEAL_PROTEIN, "14");
         values.put(MealEntry.COLUMN_MEAL_FAT, "14");
         values.put(MealEntry.COLUMN_MEAL_CARBS, "31");
-        values.put(MealEntry.COLUMN_MEAL_TIME, "657");
+        values.put(MealEntry.COLUMN_MEAL_TIME, "658");
 
         long newRowId = db.insert(MealEntry.TABLE_NAME, null, values);
 
