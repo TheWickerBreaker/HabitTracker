@@ -3,7 +3,11 @@ package com.thewickerbreaker.habittracker.data;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
 import com.thewickerbreaker.habittracker.data.DietContract.MealEntry;
+
+import static com.thewickerbreaker.habittracker.data.DietContract.MealEntry.COLUMN_MEAL_TIME;
 
 public class DietDbHelper extends SQLiteOpenHelper {
 
@@ -44,6 +48,7 @@ public class DietDbHelper extends SQLiteOpenHelper {
                 + MealEntry.COLUMN_MEAL_CARBS + " INTEGER, "
                 + MealEntry.COLUMN_MEAL_TIME + " INTEGER NOT NULL DEFAULT (strftime('%s', 'now')));";
 
+        Log.e("Fucker", COLUMN_MEAL_TIME);
         // Execute the SQL statement
         db.execSQL(SQL_CREATE_MEAL_TABLE);
     }

@@ -25,6 +25,5 @@ public class DietContract {
         public static final int MEAL_BREAKFAST = 1;
         public static final int MEAL_LUNCH = 2;
         public static final int MEAL_DINNER = 3;
-
     }
 }

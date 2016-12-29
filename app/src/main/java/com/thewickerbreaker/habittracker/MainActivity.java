@@ -5,9 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
-
 import com.thewickerbreaker.habittracker.data.DietContract.MealEntry;
 import com.thewickerbreaker.habittracker.data.DietDbHelper;
 
@@ -23,15 +21,11 @@ public class MainActivity extends AppCompatActivity {
         mDbHelper = new DietDbHelper(this);
         insertData();
         testDisplay();
-
     }
-
-
 
     private void insertData() {
         // Gets the database in write mode
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
         // Create a ContentValues object where column names are the keys,
         // and dummy data attributes are the values.
         ContentValues values = new ContentValues();
@@ -41,14 +35,11 @@ public class MainActivity extends AppCompatActivity {
         values.put(MealEntry.COLUMN_MEAL_PROTEIN, "14");
         values.put(MealEntry.COLUMN_MEAL_FAT, "14");
         values.put(MealEntry.COLUMN_MEAL_CARBS, "31");
-        values.put(MealEntry.COLUMN_MEAL_TIME, "658");
-
-        long newRowId = db.insert(MealEntry.TABLE_NAME, null, values);
-
+        //COLUMN_MEAL_TIME intentionally left out in order to use the default Unix time
+        db.insert(MealEntry.TABLE_NAME, null, values);
     }
 
     private Cursor read() {
-
         // Create and/or open a database to read from it
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
@@ -76,12 +67,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void testDisplay(){
+    //I wouldn't say this is a UI but I created this simple TextView display to help me see things
+    //clearly during the testing phase.
+    private void testDisplay() {
 
         Cursor cursor = read();
 
         TextView displayView = (TextView) findViewById(R.id.hello);
-
 
         try {
 
@@ -95,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
                     MealEntry.COLUMN_MEAL_CARBS + " - " +
                     MealEntry.COLUMN_MEAL_TIME + "\n");
 
-
             // Figure out the index of each column
             int idColumnIndex = cursor.getColumnIndex(MealEntry._ID);
             int mealColumnIndex = cursor.getColumnIndex(MealEntry.COLUMN_MEAL);
@@ -105,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
             int fatColumnIndex = cursor.getColumnIndex(MealEntry.COLUMN_MEAL_FAT);
             int carbsColumnIndex = cursor.getColumnIndex(MealEntry.COLUMN_MEAL_CARBS);
             int timeColumnIndex = cursor.getColumnIndex(MealEntry.COLUMN_MEAL_TIME);
-
 
             // Iterate through all the returned rows in the cursor
             while (cursor.moveToNext()) {
